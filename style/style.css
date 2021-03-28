@@ -1,0 +1,221 @@
+/* Overlay colors */
+/* Button colors */
+/* Header color */
+/* Phrase letter colors */
+/* Keyboard colors */
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: center;
+}
+
+.overlay {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: fixed;
+  color: #ffffff;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: none;
+  background-color: #875a8d;
+}
+
+.overlay__header {
+  font-size: 5em;
+  margin: 0;
+}
+
+.overlay__button {
+  margin-top: 50px;
+  font-size: 1.2em;
+  width: 150px;
+  font-weight: bold;
+  color: #875a8d;
+  background-color: #ffffff;
+  height: 50px;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  border: none;
+  border-radius: 30px;
+}
+
+.overlay__button:focus {
+  outline: none;
+  color: #ffffff;
+  background-color: #875a8d;
+  border: 2px solid #ffffff;
+}
+
+.overlay__button:hover {
+  color: #ffffff;
+  background-color: #875a8d;
+  border: 2px solid #ffffff;
+}
+
+/* Win and lose colors for background, text and button */
+.overlay--win {
+  background-color: #44b954;
+}
+
+.overlay--lose {
+  background-color: #db3636;
+}
+
+.overlay--lose .overlay__button {
+  color: #db3636;
+}
+
+.overlay--lose .overlay__button:focus {
+  outline: none;
+  color: #ffffff;
+  background-color: #db3636;
+  border: 2px solid #ffffff;
+}
+
+.overlay--lose .overlay__button:hover {
+  color: #ffffff;
+  background-color: #db3636;
+  border: 2px solid #ffffff;
+}
+
+.overlay--win .overlay__button {
+  color: #44b954;
+}
+
+.overlay--win .overlay__button:focus {
+  outline: none;
+  color: #ffffff;
+  background-color: #44b954;
+  border: 2px solid #ffffff;
+}
+
+.overlay--win .overlay__button:hover {
+  color: #ffffff;
+  background-color: #44b954;
+  border: 2px solid #ffffff;
+}
+
+.board__header {
+  margin: 100px 0;
+  font-size: 2em;
+  font-weight: bold;
+  color: #875a8d;
+}
+
+.board__letter {
+  width: 25px;
+  height: 25px;
+  border: 2px solid #875a8d;
+  background-color: #875a8d;
+  -webkit-user-select: text;
+     -moz-user-select: text;
+      -ms-user-select: text;
+          user-select: text;
+  padding: 20px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  color: transparent;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  margin: 5px;
+}
+
+.board__letter--show {
+  color: #875a8d;
+  font-size: 1.5em;
+  font-weight: bold;
+  background-color: #ffffff;
+  -webkit-transition-duration: 0.75s;
+          transition-duration: 0.75s;
+  -webkit-transform: rotateY(360deg);
+          transform: rotateY(360deg);
+}
+
+.board__letter--blank {
+  background-color: #ffffff;
+  border: none;
+}
+
+.board__phrase {
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 100px;
+}
+
+.board__qwerty {
+  margin-bottom: 50px;
+}
+
+.board__key {
+  margin: 10px;
+  height: 50px;
+  width: 50px;
+  border: 2px solid #875a8d;
+  font-size: 1.2em;
+  color: #875a8d;
+  font-weight: bold;
+  background-color: #ffffff;
+}
+
+.board__key:hover {
+  outline: 2px solid #875a8d;
+}
+
+.board__key:focus {
+  outline: 2px solid #875a8d;
+}
+
+.board__key--chosen {
+  font-size: 1.2em;
+  border: 2px solid #875a8d;
+  color: #875a8d;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-color: #875a8d;
+}
+
+.board__score--heart {
+  font-size: 40px;
+  color: #875a8d;
+}
+/*# sourceMappingURL=style.css.map */

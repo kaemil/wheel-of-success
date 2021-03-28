@@ -1,0 +1,184 @@
+/* Overlay colors */
+$overlay-color:#ffffff;
+$oberlay-bgcolor:#875a8d;
+
+/* Button colors */
+$button-color:#875a8d;
+$button-bgcolor:#ffffff;
+$button-focus-color:#ffffff;
+$button-focus-bgcolor:#875a8d;
+$button-focus-border:#ffffff;
+
+/* Header color */
+$headercolor:#875a8d;
+
+/* Phrase letter colors */
+$letter-border:#875a8d;
+$letter-bgcolor:#875a8d;
+$letter-color:#875a8d;
+$letter-bgcolor-show:#ffffff;
+$letter-bgcolor-blank:#ffffff;
+
+/* Keyboard colors */
+$keyborder:#ffffff;
+$keybgborder:#ffffff;
+$keycolor:#875a8d;
+$keyborder:#875a8d;
+$keyborder-hover:#875a8d;
+$keybgcolor:#875a8d;
+$keybgcolor-hover:#875a8d;
+$scoreheart:#875a8d;
+
+
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+}
+
+.overlay {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    color: $overlay-color;
+    justify-content: center;
+    text-align: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: none;
+    background-color: $oberlay-bgcolor;
+
+    &__header {
+        font-size: 5em;
+        margin: 0
+    }
+
+    &__button {
+        margin-top: 50px;
+        font-size: 1.2em;
+        width: 150px;
+        font-weight: bold;
+        color: $button-color;
+        background-color: $button-bgcolor;
+        height: 50px;
+        align-self: center;
+        border: none;
+        border-radius: 30px;
+    }
+
+    &__button:focus {
+        outline: none;
+        color: $button-focus-color;
+        background-color: $button-focus-bgcolor;
+        border: 2px solid $button-focus-border;
+    }
+
+    &__button:hover {
+        color: #ffffff;
+        background-color: #875a8d;
+        border: 2px solid #ffffff;
+    }
+
+}
+
+@import 'colorstyle';
+
+.board {
+    &__header {
+        margin: 100px 0;
+        font-size: 2em;
+        font-weight: bold;
+        color: $headercolor;
+    }
+
+    &__letter {
+        width: 25px;
+        height: 25px;
+        border: 2px solid $letter-border;
+        background-color: $letter-bgcolor;
+        user-select: text;
+        padding: 20px;
+        justify-content: center;
+        display: inline-flex;
+        flex-direction: column;
+        color: transparent;
+        user-select: none;
+        margin: 5px;
+    }
+
+    &__letter {
+        &--show {
+            color: $letter-color;
+            font-size: 1.5em;
+            font-weight: bold;
+            background-color: $letter-bgcolor-show;
+            transition-duration: 0.75s;
+            transform: rotateY(360deg);
+        }
+    }
+
+    &__letter {
+        &--blank {
+            background-color: $letter-bgcolor-blank;
+            border: none;
+        }
+    }
+
+    &__phrase {
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 100px;
+
+    }
+
+    &__qwerty {
+        margin-bottom: 50px;
+    }
+
+    &__key {
+        margin: 10px;
+        height: 50px;
+        width: 50px;
+        border: 2px solid $keyborder;
+        font-size: 1.2em;
+        color: $keycolor;
+        font-weight: bold;
+        background-color: $keybgborder;
+    }
+
+    &__key:hover {
+        outline: 2px solid $keyborder-hover;
+    }
+
+    &__key:focus {
+        outline: 2px solid $keyborder-hover;
+    }
+
+    &__key {
+        &--chosen {
+            font-size: 1.2em;
+            border: 2px solid $keyborder;
+            color: $keycolor;
+            user-select: none;
+            background-color: $keybgcolor;
+        }
+    }
+
+    &__score {
+        &--heart {
+            font-size: 40px;
+            color: $scoreheart;
+        }
+    }
+
+}

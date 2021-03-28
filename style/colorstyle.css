@@ -1,0 +1,43 @@
+/* Win and lose colors for background, text and button */
+.overlay--win {
+  background-color: #44b954;
+}
+
+.overlay--lose {
+  background-color: #db3636;
+}
+
+.overlay--lose .overlay__button {
+  color: #db3636;
+}
+
+.overlay--lose .overlay__button:focus {
+  outline: none;
+  color: #ffffff;
+  background-color: #db3636;
+  border: 2px solid #ffffff;
+}
+
+.overlay--lose .overlay__button:hover {
+  color: #ffffff;
+  background-color: #db3636;
+  border: 2px solid #ffffff;
+}
+
+.overlay--win .overlay__button {
+  color: #44b954;
+}
+
+.overlay--win .overlay__button:focus {
+  outline: none;
+  color: #ffffff;
+  background-color: #44b954;
+  border: 2px solid #ffffff;
+}
+
+.overlay--win .overlay__button:hover {
+  color: #ffffff;
+  background-color: #44b954;
+  border: 2px solid #ffffff;
+}
+/*# sourceMappingURL=colorstyle.css.map */

@@ -1,0 +1,52 @@
+$wincolor: #44b954;
+$losecolor: #db3636;
+$textcolor: #ffffff;
+$bordercolor: #ffffff;
+
+/* Win and lose colors for background, text and button */
+
+.overlay {
+    &--win {
+        background-color: $wincolor;
+    }
+}
+
+.overlay {
+    &--lose {
+        background-color: $losecolor;
+    }
+}
+
+.overlay--lose .overlay__button {
+    color: $losecolor;
+}
+
+.overlay--lose .overlay__button:focus {
+    outline: none;
+    color: $textcolor;
+    background-color: $losecolor;
+    border: 2px solid $bordercolor;
+}
+
+.overlay--lose .overlay__button:hover {
+    color: $textcolor;
+    background-color: $losecolor;
+    border: 2px solid $bordercolor;
+}
+
+.overlay--win .overlay__button {
+    color: $wincolor;
+}
+
+.overlay--win .overlay__button:focus {
+    outline: none;
+    color: $textcolor;
+    background-color: $wincolor;
+    border: 2px solid $bordercolor;
+}
+
+.overlay--win .overlay__button:hover {
+    color: $textcolor;
+    background-color: $wincolor;
+    border: 2px solid $bordercolor;
+}
