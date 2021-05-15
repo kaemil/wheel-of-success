@@ -12,3 +12,7 @@ This project was created to practice java script functions, CSS formatting and H
 - SCSS
 - JS
 - BEM methodology
+
+Link
+
+https://kaemil.github.io/Wheel-of-success/
