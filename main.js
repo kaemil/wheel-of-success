@@ -9,6 +9,7 @@ const keyboardKeys = document.getElementsByClassName('board__key');
 const placeContainer = document.querySelector('.board__phrase');
 const buttonsList = document.querySelectorAll('.board__key');
 const endGame = document.querySelector('.overlay__header');
+const endGampePhrase = document.querySelector('.overlay__phrase');
 const start = document.querySelector('.overlay__button');
 const overlay = document.querySelector('.overlay');
 
@@ -62,6 +63,7 @@ const checkWin = () => {
     overlay.classList.add('overlay--lose');
     overlay.style.display = 'flex';
     endGame.textContent = 'You lost! Try again.';
+    endGampePhrase.textContent = `Phrase: ${choosenPhrase.toLocaleLowerCase()}`;
   }
 
   const charsList = document.getElementsByClassName('board__letter');
@@ -80,6 +82,7 @@ const checkWin = () => {
 const reset = () => {
   lives = 6;
 
+  endGampePhrase.textContent = '';
   overlay.classList = 'overlay';
   const charsList = document.getElementsByClassName('board__letter');
 
