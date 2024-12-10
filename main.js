@@ -1,155 +1,157 @@
-//-------------------// Variables //-------------------//
-let phrases = ['ABOVE AND BEYOND', 'FISH FOOD', 'EARLY IN THE MORNING', 'YOU CAN TRUST ME', 'COME BACK SOON', 'GOOD NIGHT', 'HAVE FUN', 'FLEX YOUR BICEP', 'GUESS ME', 'ENJOY YOUR STAY'];
-let placeWord = document.querySelector('.board__phrase')
-let keyPress = document.querySelectorAll('.board__key')
-let allKeys = document.getElementsByClassName('board__key');
-let buttons = document.querySelectorAll('.board__key--chosen')
+import { PHRASES, CHARS } from './consts.js';
+
+const checkedChars = [];
+let choosenPhrase = '';
 let lives = 6;
-let checkLetter = [];
-let endGame = document.querySelector('.overlay__header')
-let overlay = document.querySelector('.overlay')
-let start = document.querySelector('.overlay__button')
-let heart = document.getElementsByClassName('board__score--heart')
 
-//-------------------// Functions //-------------------//
+const heartsList = document.getElementsByClassName('board__score--heart');
+const keyboardKeys = document.getElementsByClassName('board__key');
+const placeContainer = document.querySelector('.board__phrase');
+const buttonsList = document.querySelectorAll('.board__key');
+const endGame = document.querySelector('.overlay__header');
+const start = document.querySelector('.overlay__button');
+const overlay = document.querySelector('.overlay');
 
-// Random phrases generated from list //
-function randomWord() {
-    let guessWord = Math.floor(Math.random() * phrases.length);
-    return guessWord;
-}
+const getPhrase = () => {
+  const index = Math.floor(Math.random() * PHRASES.length);
+  choosenPhrase = PHRASES[index];
+};
 
-// Insert generated phrase into prepared place, if phrase is multi words insert empty space beetween //
-function addGuessWord() {
-    let word = phrases[randomWord()]
-    for (i = 0; i < word.length; i++) {
-        let li = document.createElement('div')
-        placeWord.appendChild(li);
-        li.setAttribute('class', 'board__letter');
-        li.textContent = word[i].toUpperCase();
-    }
-    let liList = document.getElementsByClassName('board__letter');
-    for (i = 0; i < liList.length; i++) {
-        correctLetter = liList[i].textContent
-        if (correctLetter.toLowerCase() === ' ') {
-            liList[i].classList.add('board__letter--show');
-            liList[i].classList.add('board__letter--blank')
-        }
-    }
-    overlay.classList.remove('overlay--lose')
-    overlay.classList.remove('overlay--win')
-}
+const addGuessWord = () => {
+  reset();
+  getPhrase();
 
-// Checks if clicked or pressed key is letter in phrase, if so, shows it //
-function checkGuess(guess) {
-    let correctLetter = null
-    let liList = document.getElementsByClassName('board__letter');
-    for (i = 0; i < liList.length; i++) {
-        if (liList[i].innerHTML.toLowerCase() === guess) {
-            liList[i].classList.add('board__letter--show')
-            correctLetter = liList[i].innerHTML;
-        }
-    }
-    if (correctLetter != null) {
-        return correctLetter;
-    }
-    return;
-}
+  for (let i = 0; i < choosenPhrase.length; i++) {
+    const char = choosenPhrase.charAt(i);
 
-// Checks if all letter are guessed => checks win condition. Checks if all lives are usec => lose condition //
-function checkWin() {
-    if (lives == 0) {
-        overlay.classList.add('overlay--lose');
-        overlay.style.display = 'flex'
-        endGame.textContent = 'You lost! Try again.'
-        reset()
-        return
+    const li = document.createElement('div');
+    placeContainer.appendChild(li);
+
+    if (char === ' ') {
+      li.setAttribute(
+        'class',
+        'board__letter board__letter--blank board__letter--show'
+      );
+    } else {
+      li.setAttribute('class', 'board__letter');
     }
-    let liList = document.getElementsByClassName('board__letter')
-    for (i = 0; i < liList.length; i++) {
-        if (liList[i].classList.contains('board__letter--show') === false) {
-            return
-        }
+  }
+};
+
+const checkGuess = (guess) => {
+  let foundMatch = false;
+
+  const charsList = document.getElementsByClassName('board__letter');
+
+  for (let i = 0; i < choosenPhrase.length; i++) {
+    const char = choosenPhrase.charAt(i).toLocaleLowerCase();
+
+    if (char === guess) {
+      charsList[i].classList.add('board__letter--show');
+      charsList[i].textContent = char.toLocaleUpperCase();
+
+      foundMatch = true;
     }
+  }
+
+  return foundMatch;
+};
+
+const checkWin = () => {
+  if (lives == 0) {
+    overlay.classList.add('overlay--lose');
+    overlay.style.display = 'flex';
+    endGame.textContent = 'You lost! Try again.';
+  }
+
+  const charsList = document.getElementsByClassName('board__letter');
+
+  const isGuessed = Array.from(charsList).every((item) =>
+    item.classList.contains('board__letter--show')
+  );
+
+  if (isGuessed) {
     overlay.classList.add('overlay--win');
-    overlay.style.display = 'flex'
-    endGame.textContent = 'You won!'
+    overlay.style.display = 'flex';
+    endGame.textContent = 'You won!';
+  }
+};
 
-    reset();
-}
+const reset = () => {
+  lives = 6;
 
-// Resets keys look, lives   //
-function reset() {
+  overlay.classList = 'overlay';
+  const charsList = document.getElementsByClassName('board__letter');
 
-    lives = 6;
-    checkLetter = [];
-    while (placeWord.firstChild) {
-        placeWord.removeChild(placeWord.firstChild)
-    }
-    for (i = 0; i < allKeys.length; i++) {
-        allKeys[i].setAttribute('class', 'board__key');
-        allKeys[i].setAttribute('disabled', 'true')
-    }
-    for (i = 0; i < allKeys.length; i++) {
-        if (allKeys[i].textContent === guess) {
-            allKeys[i].classList.remove('board__key--chosen');
-        }
-    }
+  Array.from(charsList).forEach((item) => item.remove());
 
-}
+  for (let i = 0; i < keyboardKeys.length; i++) {
+    keyboardKeys[i].setAttribute('class', 'board__key');
+    keyboardKeys[i].setAttribute('disabled', 'true');
+    keyboardKeys[i].style.cursor = 'pointer';
+    keyboardKeys[i].style.outline = '2px solid var($keyborder-hover)';
+  }
+};
 
-//-------------------// Event handlers //-------------------//
+start.addEventListener('click', () => {
+  overlay.style.display = 'none';
+  addGuessWord();
 
-// Hiding startgame layout, calls addGuessWord(), lives reset //
-start.addEventListener('click', function () {
-    overlay.style.display = 'none';
-    addGuessWord();
-    for (i = 0; i < heart.length; i++) {
-        heart[i].className = 'fas fa-heart board__score--heart'
-    }
-    for (i = 0; i < allKeys.length; i++) {
-        allKeys[i].removeAttribute('disabled')
-    }
+  for (let i = 0; i < heartsList.length; i++) {
+    heartsList[i].className = 'fas fa-heart board__score--heart';
+  }
+
+  for (let i = 0; i < keyboardKeys.length; i++) {
+    keyboardKeys[i].removeAttribute('disabled');
+  }
 });
 
-// Takes user keyboard pressed letter, disable it, removes one life if wrong, checks if keyboard was pressed more times, calls checkWin() //
-document.addEventListener('keydown', function (e) {
-    if (overlay.getAttribute('style') === 'display: none;') {
-        let guess = e.key.toLowerCase();
-        const charList = 'abcdefghijklmnopqrstuvwxyz';
+const setChoosenButtonStyle = (element) => {
+  element.classList.add('board__key--chosen');
+  element.setAttribute('disabled', 'true');
+  element.style.cursor = 'auto';
+  element.style.outline = 'none';
+};
 
-        if (charList.indexOf(guess) === -1) return;
+const removeLife = () => {
+  lives -= 1;
+  heartsList[lives].className = 'far fa-heart board__score--heart';
+};
 
-        for (i = 0; i < allKeys.length; i++) {
-            if (allKeys[i].textContent === guess) {
-                allKeys[i].setAttribute('disabled', 'true');
-                allKeys[i].classList.add('board__key--chosen');
-            }
-        }
-        var foundLetter = checkGuess(guess)
+document.addEventListener('keydown', (event) => {
+  if (overlay.getAttribute('style') === 'display: none;') {
+    const guess = event.key.toLowerCase();
 
-        if (checkLetter.includes(guess) === false) {
-            checkLetter.push(guess);
-            if (foundLetter == null) {
-                lives -= 1;
-                heart[lives].className = 'far fa-heart board__score--heart'
-            }
-        }
-        checkWin()
+    if (CHARS.indexOf(guess) === -1) return;
+
+    for (let i = 0; i < keyboardKeys.length; i++) {
+      if (keyboardKeys[i].textContent === guess) {
+        setChoosenButtonStyle(keyboardKeys[i]);
+      }
     }
-})
 
-// Takes user mouse clicked letter, disable it, removes one life if wrong, calls checkWin() //
-keyPress.forEach(function (keyPress) {
-    keyPress.addEventListener("click", function (e) {
-        e.target.classList.add('board__key--chosen');
-        e.target.setAttribute('disabled', 'true');
-        let guess = keyPress.textContent
-        var foundLetter = checkGuess(guess)
-        if (foundLetter == null) {
-            lives -= 1
-            heart[lives].className = 'far fa-heart board__score--heart'
-        }
-        checkWin()
-    })
-})
+    const isGuessed = checkGuess(guess);
+
+    if (!isGuessed && !checkedChars.includes(guess)) {
+      checkedChars.push(guess);
+      removeLife();
+    }
+
+    checkWin();
+  }
+});
+
+buttonsList.forEach((button) => {
+  button.addEventListener('click', (event) => {
+    setChoosenButtonStyle(event.target);
+    const guess = button.textContent;
+
+    const isGuessed = checkGuess(guess);
+
+    if (!isGuessed) {
+      removeLife();
+    }
+
+    checkWin();
+  });
+});

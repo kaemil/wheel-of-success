@@ -7,6 +7,7 @@ Simple interactive game where user have to guess random phrase.
 This project was created to practice java script functions, CSS formatting and HTML tags.
 
 **Skills used:**
+
 - HTML5
 - CSS3
 - SCSS
@@ -15,4 +16,4 @@ This project was created to practice java script functions, CSS formatting and H
 
 **Link**
 
-https://kaemil.github.io/Wheel-of-success/
+https://kaemil.github.io/wheel-of-success/

@@ -1,0 +1,13 @@
+{
+  "name": "wheel-of-success",
+  "version": "1.0.0",
+  "main": "main.js",
+  "type": "module",
+  "homepage": "https://kaemil.github.io/wheel-of-success",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
